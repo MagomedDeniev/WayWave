@@ -15,7 +15,6 @@
 ###< phpunit/phpunit ###
 
 ###> symfony/asset-mapper ###
-/public/assets/
 /assets/vendor/
 ###< symfony/asset-mapper ###
 
@@ -30,5 +29,4 @@ yarn-error.log
 .idea
 .DS_Store
 /public/uploads
-/public/assets
  ###< mac/phpstorm ###
