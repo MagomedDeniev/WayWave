@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Product{% endblock %}
+
+{% block body %}
+    <h1>Create new Product</h1>
+
+    {{ form_start(form) }}
+
+    {{ form_row(form.name) }}
+    {{ form_row(form.vendor) }}
+    {{ form_row(form.description) }}
+    {{ form_row(form.unit) }}
+    {{ form_row(form.size) }}
+    {{ form_row(form.price) }}
+
+    <div id="images" data-prototype="{{ form_widget(form.images.vars.prototype)|e('html_attr') }}">
+        <h3>Images</h3>
+        {% for image in form.images %}
+            <div class="image-item">
+                {{ form_row(image) }}
+            </div>
+        {% endfor %}
+    </div>
+
+    <button type="button" id="add-image">Add another image</button>
+
+    <button class="btn">{{ button_label|default('Save') }}</button>
+
+    {{ form_end(form) }}
+
+    <a href="{{ path('product_index') }}">back to list</a>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            let imagesContainer = document.querySelector('#images');
+            let addImageButton = document.querySelector('#add-image');
+            let prototype = imagesContainer.getAttribute('data-prototype');
+            let index = imagesContainer.querySelectorAll('.image-item').length;
+
+            addImageButton.addEventListener('click', function() {
+                let newForm = prototype.replace(/__images__/g, index);
+                imagesContainer.insertAdjacentHTML('beforeend', newForm);
+                index++;
+            });
+        });
+    </script>
+{% endblock %}

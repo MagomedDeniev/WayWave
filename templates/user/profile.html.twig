@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello UserController!{% endblock %}
+
+{% block body %}
+
+    <style>
+        .profile-block {
+            background: white;
+            border-radius: 6px;
+            display: flex;
+        }
+        .profile-avatar {
+            height: 200px;
+            width: 200px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .profile-avatar-image {
+            width: 160px;
+            height: 160px;
+            border-radius: 100px;
+            background-size: 100%;
+        }
+        .profile-about {
+            width: calc(100% - 200px);
+            margin: 30px 12px;
+        }
+    </style>
+
+    {% if app.user.avatar %}
+        {% set avatar_link = vich_uploader_asset(app.user, 'avatarFile') %}
+    {% else %}
+        {% set avatar_link = asset('build/images/avatar.jpg') %}
+    {% endif %}
+
+    <div class="back-picture bp-130" style="margin-right: 16px;background-image: url('{{ avatar_link }}')">
+    </div>
+
+    <div class="profile-block">
+        <div class="profile-avatar">
+            <div class="profile-avatar-image" style="background-image: url('{{ avatar_link }}')"></div>
+        </div>
+        <div class="profile-about">
+            <div class="profile-full-name fw-bold">{{ app.user.fullName }}</div>
+            <div>{{ app.user.email }}</div>
+            <div>+{{ app.user.number }}</div>
+            <div>{{ app.user.newsletter ? 'Вы получаете новости' : 'Вы не получаете новости' }}</div>
+        </div>
+    </div>
+
+{% endblock %}

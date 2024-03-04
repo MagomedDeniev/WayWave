@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello UserController!{% endblock %}
+
+{% block body %}
+
+    {{ form_errors(form) }}
+
+    {{ form_start(form) }}
+        {{ dump(form.avatarFile) }}
+
+        {{ form_row(form.avatarFile) }}
+        {{ form_row(form.fullName) }}
+        {{ form_row(form.number) }}
+        {{ form_row(form.email) }}
+        {{ form_row(form.newsletter) }}
+        <button type="submit" class="btn">Сохранить</button>
+
+    {{ form_end(form) }}
+
+{% endblock %}

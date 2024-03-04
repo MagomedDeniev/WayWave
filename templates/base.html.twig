@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %} - WayWave</title>
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+        {% block stylesheets %}{% endblock %}
+            {{ encore_entry_link_tags('app') }}
+        {% block javascripts %}{% endblock %}
+            {{ encore_entry_script_tags('app') }}
+    </head>
+
+    <body>
+
+        <style>
+            .waywave-logo {
+                font-size: 26px;
+                font-weight: 500;
+                text-transform: uppercase;
+            }
+            .way-logo {
+                color: #f75c69;
+            }
+            .wave-logo {
+                color: #2cb2eb;
+                margin-left: 3px;
+            }
+        </style>
+
+        <header>
+            <nav class="navbar navbar-expand-md navbar-expand-md fixed-top bg-light">
+                <div class="container">
+                    <a class="navbar-brand" href="{{ path('app_home') }}" style="padding: unset">
+{#                        <img src="{{ asset('assets/images/logotype.png') }}" alt="Logo" height="38" class="d-inline-block align-text-top">#}
+{#                        <img src="{{ asset('assets/images/logotype-icon.png') }}" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">#}
+                        <span class="waywave-logo">
+                            <span class="way-logo">Way</span><span class="wave-logo">Wave</span>
+                        </span>
+                    </a>
+                    <div class="collapse navbar-collapse" id="navbarColor01">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Home
+                                </a>
+                                <ul class="dropdown-menu">
+                                    {% if not app.user %}
+                                        <li><a class="dropdown-item" href="{{ path('app_login') }}">Вход</a></li>
+                                        <li><a class="dropdown-item" href="{{ path('app_register') }}">Регистрация</a></li>
+                                    {% endif %}
+                                    <li><hr class="dropdown-divider"></li>
+                                    {% if app.user %}
+                                        <li><a class="dropdown-item" href="{{ path('app_logout') }}">Выход</a></li>
+                                    {% endif %}
+                                </ul>
+                            </li>
+                            {% if app.user %}
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ path('user_profile') }}">Профиль</a>
+                                </li>
+                            {% endif %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ path('user_edit') }}">Настройки</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ path('product_index') }}">Продукты</a>
+                            </li>
+                        </ul>
+                        <form class="d-flex" role="search">
+                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                            <button class="btn btn-primary" type="submit">Search</button>
+                        </form>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <main>
+            {% block main %}
+                <div class="container">
+                    {% block body %}{% endblock %}
+                </div>
+            {% endblock %}
+        </main>
+    </body>
+</html>
